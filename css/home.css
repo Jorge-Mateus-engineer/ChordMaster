@@ -1,0 +1,22 @@
+body {
+  background: linear-gradient(
+    41deg,
+    var(--primary-blue) 0%,
+    var(--accent-green) 100%
+  );
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: calc(100vh - 8rem);
+}
+
+.nav-bar {
+  background: none;
+}
+
+.hero-img {
+  height: 60%;
+  width: auto;
+}
