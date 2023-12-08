@@ -1,10 +1,33 @@
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 body {
   background: linear-gradient(
-    41deg,
-    var(--primary-blue) 0%,
-    var(--accent-green) 100%
+    43deg,
+    var(--accent-purple) 0%,
+    var(--primary-blue) 25%,
+    var(--accent-green) 50%,
+    var(--higlight-yellow) 75%,
+    var(--energetic-orange) 100%
   );
+  animation: gradient 20s ease infinite;
+  background-size: 400% 400%;
 }
+
+.nav-bar {
+  background: none;
+}
+
+/*HERO SECTION*/
 
 main {
   display: grid;
@@ -12,11 +35,78 @@ main {
   height: calc(100vh - 8rem);
 }
 
-.nav-bar {
-  background: none;
+.hero-text-container {
+  height: calc(100vh - 8rem);
+  padding: 5rem 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-tittle {
+  font-size: 11rem;
+  font-weight: 600;
+  line-height: 0.9;
+  color: var(--pure-black);
+  margin: 0;
+}
+
+.hero-text {
+  padding-top: 1rem;
+  font-size: 3rem;
+  color: var(--dark-gray);
+  margin: 0;
+}
+
+.cta-button {
+  font-size: 2rem;
+  transition: all 0.4s;
+  align-self: flex-start;
+  margin-top: 2.5rem;
+  padding: 1rem 2rem;
+  border: 1px solid var(--dark-gray);
+}
+
+.cta-button:visited,
+.cta-button:link {
+  text-decoration: none;
+  color: var(--light-gray);
+  background-color: var(--primary-blue);
+  border-radius: 15px;
+}
+
+.cta-button:hover,
+.cta-button:active {
+  transform: translate3d(5px, -5px, 0);
+  box-shadow: -5px 5px var(--primary-blue);
+  background-color: var(--accent-green);
+}
+
+.hero-img-container {
+  height: calc(100vh - 8rem);
+  position: relative;
 }
 
 .hero-img {
-  height: 60%;
+  height: 100%;
   width: auto;
+  position: absolute;
+  z-index: 2;
+}
+
+.hero-img-container::before {
+  content: "";
+  position: absolute;
+  height: 80rem;
+  width: 80rem;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: var(--light-gray);
+  filter: blur(1px);
+  opacity: 0.5;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-58%) translateY(-50%);
 }

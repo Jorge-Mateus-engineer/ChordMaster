@@ -3,21 +3,26 @@
   --accent-purple: #a352c2;
   --accent-green: #35cc71;
   --higlight-yellow: #f1c40f;
-  --enmergetic-orange: #e67e22;
+  --energetic-orange: #e67e22;
   --neutral-gray: #707070;
   --light-gray: #f2f2f2;
   --dark-gray: #333333;
+  --pure-black: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   font-size: 62.5%;
   font-family: "Raleway", sans-serif;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 
 body {
-  margin: 0;
-  box-sizing: border-box;
   background-color: var(--light-gray);
 }
 
