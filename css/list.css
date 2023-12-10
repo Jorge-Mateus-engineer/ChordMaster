@@ -4,9 +4,118 @@ main {
   height: calc(100vh - 8rem);
 }
 
+/*FRETBOARD SECTION*/
+
 .fretboard {
   height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.fret-numbers {
+  list-style: none;
+  display: flex;
+}
+
+.string {
+  display: flex;
+  position: relative;
+}
+
+.fret:nth-child(2) {
+  border-right: 3px solid var(--dark-gray);
+}
+
+.fret {
+  border-right: 1px solid var(--dark-gray);
+}
+
+.fret:first-child {
+  font-weight: 600;
+  border-right: none;
+}
+
+.third .fret:nth-child(5),
+.third .fret:nth-child(7),
+.third .fret:nth-child(9),
+.third .fret:nth-child(11),
+.third .fret:nth-child(14) {
+  position: relative;
+}
+
+.third .fret:nth-child(5)::before,
+.third .fret:nth-child(7)::before,
+.third .fret:nth-child(9)::before,
+.third .fret:nth-child(11)::before,
+.third .fret:nth-child(14)::before {
+  content: "";
+  background-color: var(--neutral-gray);
+  opacity: 0.7;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*Use of pseude elements to make the strings*/
+
+.first::before,
+.second::before,
+.third::before,
+.fourth::before,
+.fifth::before,
+.sixth::before {
+  content: "";
+  background-color: var(--dark-gray);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 9rem;
+  width: 92.857142857%;
+  z-index: -1;
+}
+
+.first::before {
+  height: 0.1rem;
+}
+
+.second::before {
+  height: 0.15rem;
+}
+
+.third::before {
+  height: 0.2rem;
+}
+
+.fourth::before {
+  height: 0.3rem;
+}
+
+.fifth::before {
+  height: 0.35rem;
+}
+
+.sixth::before {
+  height: 0.4rem;
+}
+
+/*Fret size*/
+
+.fret-numbers > li,
+.fret {
+  font-size: 2.5rem;
+  height: 5rem;
+  width: 9rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+/*PICKLIST SECTION*/
 
 .picklist {
   height: 40%;
