@@ -17,6 +17,8 @@ main {
 .fret-numbers {
   list-style: none;
   display: flex;
+  color: var(--energetic-orange);
+  font-weight: 600;
 }
 
 .string {
@@ -35,7 +37,10 @@ main {
 .fret:first-child {
   font-weight: 600;
   border-right: none;
+  color: var(--primary-blue);
 }
+
+/*Pseudo elements to make the fret guides*/
 
 .third .fret:nth-child(5),
 .third .fret:nth-child(7),
@@ -57,12 +62,12 @@ main {
   width: 1.5rem;
   border-radius: 50%;
   position: absolute;
-  top: 75%;
+  top: 80%;
   left: 50%;
   transform: translateX(-50%);
 }
 
-/*Use of pseude elements to make the strings*/
+/*Use of pseudo elements to make the strings*/
 
 .first::before,
 .second::before,
@@ -113,6 +118,19 @@ main {
   width: 9rem;
   padding: 1rem 0;
   text-align: center;
+}
+
+/*Fret notes styling*/
+.fret-note {
+  display: inline-block;
+  line-height: 1;
+  border-radius: 50%;
+  font-size: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  font-weight: 600;
+  color: var(--pure-black);
+  transform: translateY(-0.5rem);
 }
 
 /*PICKLIST SECTION*/
