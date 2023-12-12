@@ -35,12 +35,16 @@ const testFingering = [0, 3, 2, 0, 1, 0];
 
 const createNoteElements = function (fingeringArray, fretArray) {
   let i = 0;
+  let element;
   fingeringArray.forEach((f) => {
-    notesArray.push(
-      `<span class='fret-note' style='background-color: ${colorMap[f]}'>${
-        f === 0 && fretArray[i] === -1 ? "x" : f
-      }</span>`
-    );
+    if (f === 0 && fretArray[i] === 0) {
+      element = `<span class='open-note'> </span>`;
+    } else if (f === 0 && fretArray[i] == -1) {
+      element = element = `<span class='muted-string'>X</span>`;
+    } else {
+      element = `<span class='fret-note' style='background-color: ${colorMap[f]}'>${f}</span>`;
+    }
+    notesArray.push(element);
     i++;
   });
 };

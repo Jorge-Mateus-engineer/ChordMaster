@@ -80,8 +80,8 @@ main {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 9rem;
-  width: 92.857142857%;
+  left: 18rem;
+  width: 85.714285714%;
   z-index: -1;
 }
 
@@ -121,7 +121,10 @@ main {
 }
 
 /*Fret notes styling*/
-.fret-note {
+
+.fret-note,
+.open-note,
+.muted-string {
   display: inline-block;
   line-height: 1;
   border-radius: 50%;
@@ -129,8 +132,24 @@ main {
   height: 2.5rem;
   width: 2.5rem;
   font-weight: 600;
+}
+
+.fret-note {
   color: var(--pure-black);
   transform: translateY(-0.5rem);
+}
+
+.open-note {
+  content: "";
+  background-color: transparent;
+  border: 2px solid var(--energetic-orange);
+  transform: translateX(3rem);
+}
+
+.muted-string {
+  color: var(--pure-black);
+  transform: translateX(3rem);
+  background-color: transparent;
 }
 
 /*PICKLIST SECTION*/
