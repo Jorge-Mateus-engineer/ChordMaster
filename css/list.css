@@ -152,6 +152,17 @@ main {
   background-color: transparent;
 }
 
+/* .fret-numbers li:nth-child(11)::before {
+  content: "";
+  background-color: var(--primary-blue);
+  opacity: 0.8;
+  position: absolute;
+  height: 26rem;
+  width: 2.5rem;
+  border-radius: 20px;
+  transform: translateX(-0.6rem) translateY(6rem);
+} */
+
 /*PICKLIST SECTION*/
 
 .picklist {
