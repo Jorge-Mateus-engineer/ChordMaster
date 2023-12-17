@@ -20,7 +20,6 @@ const allFrets = [
 let currentRoot = "C";
 let currentVariation = "major";
 let notesArray = [];
-let chordData;
 const colorMap = {
   0: "#e67e22",
   1: "#3498db",
@@ -29,13 +28,7 @@ const colorMap = {
   4: "#f1c40f",
 };
 
-//Testing
-
-const testFrets = [1, 3, 3, 1, 1, 1];
-const testFingering = [1, 3, 4, 1, 1, 1];
-const barre = true;
-const capo = true;
-const baseFret = 8;
+let chordInfo = {};
 
 //Inicializar base de datos
 
@@ -43,13 +36,12 @@ const initDB = function (rootNote) {
   fetch("../src/guitar.json")
     .then((response) => response.json())
     .then((data) => {
-      chordData = {
-        ...data[rootNote].filter((chord) => chord.suffix === currentVariation),
+      const chordData = {
+        ...data[rootNote].filter(
+          (chord) => chord.suffix === currentVariation.toLowerCase()
+        ),
       };
-      chordData[0].positions.forEach((chord, index) => {
-        console.log(chord);
-        localStorage.setItem(`Position ${index}`, JSON.stringify(chord));
-      });
+      chordInfo = { ...chordData[0] };
     })
     .catch((error) => {
       console.error("Error reading JSON file:", error);
@@ -83,43 +75,52 @@ const insertNoteElements = function (
   baseFret
 ) {
   let matchingFret;
-  if (fretNumber === -1) {
-    matchingFret = [...stringFrets].find((fret) => fret.dataset.number === "0");
-  } else if (!baseFret && !capo && !barre) {
-    matchingFret = [...stringFrets].find(
-      (fret) => fret.dataset.number === fretNumber.toString()
-    );
-  } else {
-    matchingFret = [...stringFrets].find(
-      (fret) => fret.dataset.number * 1 === fretNumber + baseFret
-    );
-  }
-  if (matchingFret) {
-    matchingFret.innerHTML = notesArray[index];
+  if (stringFrets && typeof stringFrets[Symbol.iterator] === "function") {
+    const fretArray = Array.from(stringFrets);
+
+    if (fretNumber === -1) {
+      matchingFret = fretArray.find((fret) => fret.dataset.number === "0");
+    } else if (barre == baseFret || capo == undefined) {
+      matchingFret = fretArray.find(
+        (fret) => fret.dataset.number === fretNumber.toString()
+      );
+    } else if (capo) {
+      matchingFret = fretArray.find(
+        (fret) => fret.dataset.number * 1 === fretNumber + baseFret
+      );
+    }
+    if (matchingFret) {
+      matchingFret.innerHTML = notesArray[index];
+    }
   }
 };
 
 const insertBarre = function (barre, baseFret) {
-  document.addEventListener("DOMContentLoaded", function () {
-    if (barre && baseFret >= 0) {
-      // Crear pseudo elemento
-      const barreElement = document.createElement("before");
+  if (barre && baseFret >= 0) {
+    // Crear pseudo elemento
+    const barreElement = document.createElement("before");
 
-      // Agregar estilos
-      barreElement.style.cssText =
-        "content: ''; background-color: var(--primary-blue); opacity: 0.8; position: absolute; height: 26rem; width: 2.5rem; border-radius: 20px; transform: translateX(-2rem) translateY(6rem);";
+    // Agregar estilos
+    barreElement.style.cssText =
+      "content: ''; background-color: var(--primary-blue); opacity: 0.8; position: absolute; height: 26rem; width: 2.5rem; border-radius: 20px; transform: translateX(-2rem) translateY(6rem);";
 
-      // Seleccionar el padre
-      const parentElement = document.querySelector(
-        `.fret-numbers li:nth-child(${baseFret + 3})`
-      );
+    // Seleccionar el padre
+    const parentElement = document.querySelector(
+      `.fret-numbers li:nth-child(${baseFret + 2})`
+    );
 
-      if (parentElement) {
-        // Agregar el pseudo elemento
-        parentElement.appendChild(barreElement);
-      }
+    if (parentElement) {
+      // Agregar el pseudo elemento
+      parentElement.appendChild(barreElement);
     }
-  });
+  }
+};
+
+const deleteNotes = function () {
+  document.querySelectorAll(".open-note").forEach((o) => o.remove());
+  document.querySelectorAll(".muted-string").forEach((m) => m.remove());
+  document.querySelectorAll(".fret-note").forEach((f) => f.remove());
+  notesArray = [];
 };
 
 //Basic toggle functionality for picklist
@@ -129,10 +130,7 @@ rootNotes.forEach((note) =>
     rootNotes.forEach((n) => n.classList.remove("active-root"));
     chordVariations.forEach((v) => v.classList.remove("active-variation"));
     e.target.classList.toggle("active-root");
-    //Borrar local storage antes de actualizar variable
-    localStorage.clear();
     currentRoot = e.target.textContent;
-    initDB(currentRoot);
   })
 );
 
@@ -141,17 +139,34 @@ chordVariations.forEach((variation) =>
     chordVariations.forEach((v) => v.classList.remove("active-variation"));
     e.target.classList.toggle("active-variation");
     currentVariation = e.target.textContent;
-    console.log(JSON.parse(localStorage.getItem(currentRoot)));
+    initDB(currentRoot);
+    deleteNotes();
+    //Creacion del acorde en pantalla
+    setTimeout(() => {
+      // insertBarre(
+      //   chordInfo.positions[0].barres[0]
+      //     ? chordInfo.positions[0].barres[0]
+      //     : false,
+      //   chordInfo.positions[0].baseFret
+      // );
+      createNoteElements(
+        chordInfo.positions[0].fingers,
+        chordInfo.positions[0].frets
+      );
+      for (let i = 0; i <= 6; i++) {
+        insertNoteElements(
+          chordInfo.positions[0].frets[i],
+          allFrets[i],
+          i,
+          chordInfo.positions[0].barres[0]
+            ? chordInfo.positions[0].barres[0]
+            : false,
+          chordInfo.positions[0].capo,
+          chordInfo.positions[0].baseFret
+        );
+      }
+    }, 500);
   })
 );
 
-localStorage.clear();
 initDB(currentRoot);
-
-createNoteElements(testFingering, testFrets);
-
-insertBarre(barre, baseFret);
-
-for (let i = 0; i <= 6; i++) {
-  insertNoteElements(testFrets[i], allFrets[i], i, barre, capo, baseFret);
-}
