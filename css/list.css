@@ -152,7 +152,7 @@ main {
   background-color: transparent;
 }
 
-/* .fret-numbers li:nth-child(11)::before {
+.barre-element {
   content: "";
   background-color: var(--primary-blue);
   opacity: 0.8;
@@ -160,8 +160,9 @@ main {
   height: 26rem;
   width: 2.5rem;
   border-radius: 20px;
-  transform: translateX(-0.6rem) translateY(6rem);
-} */
+  transform: translateX(-1.9rem) translateY(6rem);
+  display: inline;
+}
 
 /*PICKLIST SECTION*/
 

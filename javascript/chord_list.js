@@ -77,16 +77,19 @@ const insertNoteElements = function (
   let matchingFret;
   if (stringFrets && typeof stringFrets[Symbol.iterator] === "function") {
     const fretArray = Array.from(stringFrets);
-
     if (fretNumber === -1) {
       matchingFret = fretArray.find((fret) => fret.dataset.number === "0");
-    } else if (barre == baseFret || capo == undefined) {
+    } else if (barre === baseFret /*|| capo == undefined*/) {
       matchingFret = fretArray.find(
         (fret) => fret.dataset.number === fretNumber.toString()
       );
     } else if (capo) {
       matchingFret = fretArray.find(
         (fret) => fret.dataset.number * 1 === fretNumber + baseFret
+      );
+    } else {
+      matchingFret = fretArray.find(
+        (fret) => fret.dataset.number * 1 === fretNumber
       );
     }
     if (matchingFret) {
@@ -97,23 +100,29 @@ const insertNoteElements = function (
 
 const insertBarre = function (barre, baseFret) {
   if (barre && baseFret >= 0) {
-    // Crear pseudo elemento
-    const barreElement = document.createElement("before");
+    let parentElement;
+    // Create pseudo element
+    const barreElement = document.createElement("div");
 
-    // Agregar estilos
-    barreElement.style.cssText =
-      "content: ''; background-color: var(--primary-blue); opacity: 0.8; position: absolute; height: 26rem; width: 2.5rem; border-radius: 20px; transform: translateX(-2rem) translateY(6rem);";
+    // Add styles
+    barreElement.classList.add("barre-element");
 
-    // Seleccionar el padre
-    const parentElement = document.querySelector(
-      `.fret-numbers li:nth-child(${baseFret + 2})`
-    );
+    // Select parent
+    document.querySelectorAll(`.fret-numbers li`).forEach((f) => {
+      if (f.textContent === `${barre === 1 ? baseFret : baseFret + barre}`) {
+        parentElement = f;
+      }
+    });
 
     if (parentElement) {
       // Agregar el pseudo elemento
       parentElement.appendChild(barreElement);
     }
   }
+};
+
+const removeBarre = function () {
+  document.querySelector(".barre-element")?.remove();
 };
 
 const deleteNotes = function () {
@@ -141,14 +150,15 @@ chordVariations.forEach((variation) =>
     currentVariation = e.target.textContent;
     initDB(currentRoot);
     deleteNotes();
+    removeBarre();
     //Creacion del acorde en pantalla
     setTimeout(() => {
-      // insertBarre(
-      //   chordInfo.positions[0].barres[0]
-      //     ? chordInfo.positions[0].barres[0]
-      //     : false,
-      //   chordInfo.positions[0].baseFret
-      // );
+      insertBarre(
+        chordInfo.positions[0].barres[0]
+          ? chordInfo.positions[0].barres[0]
+          : false,
+        chordInfo.positions[0].baseFret
+      );
       createNoteElements(
         chordInfo.positions[0].fingers,
         chordInfo.positions[0].frets
@@ -158,13 +168,12 @@ chordVariations.forEach((variation) =>
           chordInfo.positions[0].frets[i],
           allFrets[i],
           i,
-          chordInfo.positions[0].barres[0]
-            ? chordInfo.positions[0].barres[0]
-            : false,
+          chordInfo.positions[0].barres[0],
           chordInfo.positions[0].capo,
           chordInfo.positions[0].baseFret
         );
       }
+      console.log(chordInfo);
     }, 500);
   })
 );
