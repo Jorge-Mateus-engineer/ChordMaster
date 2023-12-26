@@ -51,9 +51,8 @@ const initDB = function (rootNote) {
 //Function to render notes
 
 const createNoteElements = function (fingeringArray, fretArray) {
-  let i = 0;
   let element;
-  fingeringArray.forEach((f) => {
+  fingeringArray.forEach((f, i) => {
     if (f === 0 && fretArray[i] === 0) {
       element = `<span class='open-note'> </span>`;
     } else if (f === 0 && fretArray[i] == -1) {
@@ -115,7 +114,7 @@ const insertBarre = function (barre, baseFret) {
     });
 
     if (parentElement) {
-      // Agregar el pseudo elemento
+      // Add pseudo element
       parentElement.appendChild(barreElement);
     }
   }
@@ -151,7 +150,7 @@ chordVariations.forEach((variation) =>
     initDB(currentRoot);
     deleteNotes();
     removeBarre();
-    //Creacion del acorde en pantalla
+    //Chord rendering
     setTimeout(() => {
       insertBarre(
         chordInfo.positions[0].barres[0]
@@ -173,7 +172,6 @@ chordVariations.forEach((variation) =>
           chordInfo.positions[0].baseFret
         );
       }
-      console.log(chordInfo);
     }, 500);
   })
 );
