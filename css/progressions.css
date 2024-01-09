@@ -1,0 +1,13 @@
+.progression {
+  font-size: 1.5rem;
+  height: 7rem;
+  width: 20rem;
+  padding: 2rem 0;
+  text-align: center;
+  background-color: var(--dark-gray);
+  color: var(--light-gray);
+}
+
+.progression:hover {
+  cursor: pointer;
+}

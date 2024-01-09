@@ -137,6 +137,9 @@ rootNotes.forEach((note) =>
   note.addEventListener("click", (e) => {
     rootNotes.forEach((n) => n.classList.remove("active-root"));
     chordVariations.forEach((v) => v.classList.remove("active-variation"));
+    progressionElements.forEach((p) =>
+      p.classList.remove("active-progression")
+    );
     e.target.classList.toggle("active-root");
     currentRoot = e.target.textContent;
   })

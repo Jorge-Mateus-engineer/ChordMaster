@@ -175,7 +175,8 @@ main {
 }
 
 .roots,
-.variations {
+.variations,
+.progression-list {
   display: flex;
   list-style: none;
   margin-top: 1rem;
@@ -198,7 +199,8 @@ main {
 }
 
 .active-root,
-.active-variation {
+.active-variation,
+.active-progression {
   background-color: var(--higlight-yellow);
   color: var(--dark-gray);
   border: 2px solid var(--dark-gray);

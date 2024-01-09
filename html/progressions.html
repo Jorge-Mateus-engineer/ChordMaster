@@ -10,8 +10,11 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/progressions.css" />
     <link rel="stylesheet" href="../css/list.css" />
-    <title>Document</title>
+    <script defer src="../javascript/progressions.js"></script>
+    <script defer src="../javascript/chord_list.js"></script>
+    <title>ChordMaster</title>
   </head>
   <body>
     <nav class="nav-bar">
@@ -139,6 +142,38 @@
           <div class="fret" data-number="11"></div>
           <div class="fret" data-number="12"></div>
         </div>
+      </section>
+      <section class="picklist">
+        <ul class="chords"></ul>
+        <ul class="roots">
+          <li class="root-note">C</li>
+          <li class="root-note">C#</li>
+          <li class="root-note">D</li>
+          <li class="root-note">D#</li>
+          <li class="root-note">E</li>
+          <li class="root-note">F</li>
+          <li class="root-note">F#</li>
+          <li class="root-note">G</li>
+          <li class="root-note">G#</li>
+          <li class="root-note">A</li>
+          <li class="root-note">A#</li>
+          <li class="root-note">B</li>
+        </ul>
+        <ul class="progression-list">
+          <li class="progression">Major triads<br />I-ii-iii-IV-V-vi-vii*</li>
+          <li class="progression">Major 7th<br />I-ii-iii-IV-V-vi-vii</li>
+          <li class="progression">Major 6th<br />I-ii-IV-V</li>
+          <li class="progression">Major 9th<br />I-ii-IV-V-vi</li>
+          <li class="progression">
+            Natural minor triads<br />i-ii*-III-iv-v-VI-VII
+          </li>
+          <li class="progression">
+            Harmonic minor triad<br />i-ii*-III-iv-V-VI-vii*
+          </li>
+          <li class="progression">
+            Melodic minor triad<br />i-ii-III-IV-V-vi*-vii*
+          </li>
+        </ul>
       </section>
     </main>
   </body>
