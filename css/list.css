@@ -176,7 +176,8 @@ main {
 
 .roots,
 .variations,
-.progression-list {
+.progression-list,
+.chords {
   display: flex;
   list-style: none;
   margin-top: 1rem;

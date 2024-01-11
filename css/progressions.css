@@ -8,6 +8,16 @@
   color: var(--light-gray);
 }
 
+.progression-chord {
+  font-size: 1rem;
+  height: 4rem;
+  width: 10rem;
+}
+
 .progression:hover {
   cursor: pointer;
+}
+
+.chords {
+  border: 1px solid red;
 }
