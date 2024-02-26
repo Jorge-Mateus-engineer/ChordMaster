@@ -136,6 +136,7 @@ const deleteNotes = function () {
 rootNotes.forEach((note) =>
   note.addEventListener("click", (e) => {
     rootNotes.forEach((n) => n.classList.remove("active-root"));
+    e.target.classList.add("active-root");
     chordVariations.forEach((v) => v.classList.remove("active-variation"));
     if (progressionElements != undefined) {
       progressionElements.forEach((p) =>
