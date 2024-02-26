@@ -45,7 +45,7 @@ main {
 }
 
 .hero-tittle {
-  font-size: 11rem;
+  font-size: 9rem;
   font-weight: 600;
   line-height: 0.9;
   color: var(--pure-black);
@@ -85,22 +85,25 @@ main {
 
 .hero-img-container {
   height: calc(100vh - 8rem);
+  padding: 1rem;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-img {
   height: 100%;
   width: auto;
-  position: absolute;
   z-index: 2;
 }
 
 .hero-img-container::before {
   content: "";
   position: absolute;
-  height: 80rem;
-  width: 80rem;
-  border-radius: 50%;
+  height: 80%;
+  width: 80%;
+  border-radius: 50px;
   display: inline-block;
   background-color: var(--light-gray);
   filter: blur(1px);
@@ -108,5 +111,5 @@ main {
   top: 50%;
   left: 50%;
   z-index: -1;
-  transform: translateX(-58%) translateY(-50%);
+  transform: translate(-50%, -50%);
 }
