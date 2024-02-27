@@ -35,7 +35,7 @@ let chordPositions = {};
 //Inicializar base de datos
 
 const initDB = function (rootNote) {
-  fetch("../src/guitar.json")
+  fetch("../src/guitar_filtered.json")
     .then((response) => response.json())
     .then((data) => {
       const chordData = {
@@ -77,17 +77,20 @@ const insertNoteElements = function (
   baseFret
 ) {
   let matchingFret;
+  if (barre) {
+    capo = true;
+  }
   if (stringFrets && typeof stringFrets[Symbol.iterator] === "function") {
     const fretArray = Array.from(stringFrets);
     if (fretNumber === -1) {
       matchingFret = fretArray.find((fret) => fret.dataset.number === "0");
-    } else if (barre === baseFret /*|| capo == undefined*/) {
+    } else if (barre === baseFret) {
       matchingFret = fretArray.find(
         (fret) => fret.dataset.number === fretNumber.toString()
       );
     } else if (capo) {
       matchingFret = fretArray.find(
-        (fret) => fret.dataset.number * 1 === fretNumber + baseFret
+        (fret) => fret.dataset.number * 1 === fretNumber + baseFret - 1
       );
     } else {
       matchingFret = fretArray.find(
