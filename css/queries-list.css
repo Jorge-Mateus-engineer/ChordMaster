@@ -1,0 +1,90 @@
+/*1312px*/
+@media (max-width: 82em) {
+  .fret-numbers > li,
+  .fret {
+    width: 7rem;
+  }
+
+  .first::before,
+  .second::before,
+  .third::before,
+  .fourth::before,
+  .fifth::before,
+  .sixth::before {
+    left: 14rem;
+    width: 84rem;
+  }
+
+  .open-note,
+  .muted-string {
+    transform: translateX(2rem);
+  }
+}
+
+/*1024px*/
+@media (max-width: 64em) {
+  .fret-numbers > li,
+  .fret {
+    width: 6rem;
+  }
+
+  .first::before,
+  .second::before,
+  .third::before,
+  .fourth::before,
+  .fifth::before,
+  .sixth::before {
+    left: 12rem;
+    width: 72rem;
+  }
+
+  .open-note,
+  .muted-string {
+    transform: translateX(1.5rem);
+  }
+
+  .root-note,
+  .chord-variation {
+    font-size: 2rem;
+    height: 4.5rem;
+    width: 8rem;
+    padding: 1rem 0;
+  }
+}
+
+/*864px*/
+@media (max-width: 54em) {
+  .fretboard {
+    margin-right: 2rem;
+  }
+  .fret-numbers > li {
+    font-size: 2rem;
+  }
+
+  .fret-numbers > li,
+  .fret {
+    width: 5rem;
+  }
+
+  .first::before,
+  .second::before,
+  .third::before,
+  .fourth::before,
+  .fifth::before,
+  .sixth::before {
+    left: 10rem;
+    width: 60rem;
+  }
+
+  .open-note,
+  .muted-string {
+    transform: translateX(1rem);
+  }
+}
+
+/*528px*/
+@media (max-width: 33em) {
+  main {
+    height: auto;
+  }
+}

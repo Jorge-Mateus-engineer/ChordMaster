@@ -81,7 +81,7 @@ main {
   top: 50%;
   transform: translateY(-50%);
   left: 18rem;
-  width: 85.714285714%;
+  width: 108rem;
   z-index: -1;
 }
 
@@ -179,8 +179,11 @@ main {
 .progression-list,
 .chords {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 0.5rem;
   list-style: none;
-  margin-top: 1rem;
+  margin: 1rem 2rem 2rem 2rem;
 }
 
 .root-note,
