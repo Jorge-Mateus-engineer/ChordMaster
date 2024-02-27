@@ -176,7 +176,7 @@ main {
 
 .roots,
 .variations,
-.progression-list,
+.positions,
 .chords {
   display: flex;
   flex-wrap: wrap;
@@ -187,6 +187,7 @@ main {
 }
 
 .root-note,
+.position,
 .chord-variation {
   font-size: 2rem;
   height: 5.5rem;
@@ -198,7 +199,8 @@ main {
 }
 
 .root-note:hover,
-.chord-variation:hover {
+.chord-variation:hover,
+.position:hover {
   cursor: pointer;
 }
 

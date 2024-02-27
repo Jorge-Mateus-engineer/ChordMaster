@@ -1,5 +1,6 @@
 const rootNotes = document.querySelectorAll(".root-note");
 const chordVariations = document.querySelectorAll(".chord-variation");
+const positions = document.querySelectorAll(".position");
 
 const firstStringFrets = document.querySelectorAll(".first .fret");
 const secondStringFrets = document.querySelectorAll(".second .fret");
@@ -29,6 +30,7 @@ const colorMap = {
 };
 
 let chordInfo = {};
+let chordPositions = {};
 
 //Inicializar base de datos
 
@@ -42,6 +44,7 @@ const initDB = function (rootNote) {
         ),
       };
       chordInfo = { ...chordData[0] };
+      localStorage.setItem("ChordPositions", JSON.stringify(chordData[0]));
     })
     .catch((error) => {
       console.error("Error reading JSON file:", error);
@@ -131,6 +134,30 @@ const deleteNotes = function () {
   notesArray = [];
 };
 
+const renderChords = function (position) {
+  chordPositions = JSON.parse(localStorage.getItem("ChordPositions"));
+  insertBarre(
+    chordInfo.positions[position].barres[0]
+      ? chordInfo.positions[position].barres[0]
+      : false,
+    chordInfo.positions[position].baseFret
+  );
+  createNoteElements(
+    chordInfo.positions[position].fingers,
+    chordInfo.positions[position].frets
+  );
+  for (let i = 0; i <= 6; i++) {
+    insertNoteElements(
+      chordInfo.positions[position].frets[i],
+      allFrets[i],
+      i,
+      chordInfo.positions[position].barres[0],
+      chordInfo.positions[position].capo,
+      chordInfo.positions[position].baseFret
+    );
+  }
+};
+
 //Basic toggle functionality for picklist
 
 rootNotes.forEach((note) =>
@@ -138,6 +165,7 @@ rootNotes.forEach((note) =>
     rootNotes.forEach((n) => n.classList.remove("active-root"));
     e.target.classList.add("active-root");
     chordVariations.forEach((v) => v.classList.remove("active-variation"));
+    positions.forEach((p) => p.classList.remove("active-variation"));
     currentRoot = e.target.textContent;
   })
 );
@@ -145,35 +173,26 @@ rootNotes.forEach((note) =>
 chordVariations.forEach((variation) =>
   variation.addEventListener("click", (e) => {
     chordVariations.forEach((v) => v.classList.remove("active-variation"));
+    positions.forEach((p) => p.classList.remove("active-variation"));
+    positions[0].classList.add("active-variation");
     e.target.classList.toggle("active-variation");
     currentVariation = e.target.textContent;
     initDB(currentRoot);
     deleteNotes();
     removeBarre();
     //Chord rendering
-    setTimeout(() => {
-      insertBarre(
-        chordInfo.positions[0].barres[0]
-          ? chordInfo.positions[0].barres[0]
-          : false,
-        chordInfo.positions[0].baseFret
-      );
-      createNoteElements(
-        chordInfo.positions[0].fingers,
-        chordInfo.positions[0].frets
-      );
-      for (let i = 0; i <= 6; i++) {
-        insertNoteElements(
-          chordInfo.positions[0].frets[i],
-          allFrets[i],
-          i,
-          chordInfo.positions[0].barres[0],
-          chordInfo.positions[0].capo,
-          chordInfo.positions[0].baseFret
-        );
-      }
-    }, 500);
+    setTimeout(renderChords, 500, 0);
   })
 );
 
-initDB(currentRoot);
+positions.forEach((p) =>
+  p.addEventListener("click", (e) => {
+    deleteNotes();
+    removeBarre();
+    positions.forEach((p) => p.classList.remove("active-variation"));
+    e.target.classList.add("active-variation");
+    setTimeout(renderChords, 500, parseInt(e.target.textContent) - 1);
+  })
+);
+
+initDB("C");

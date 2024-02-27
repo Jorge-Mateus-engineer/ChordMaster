@@ -44,6 +44,7 @@
   }
 
   .root-note,
+  .position,
   .chord-variation {
     font-size: 2rem;
     height: 4.5rem;
@@ -54,6 +55,9 @@
 
 /*864px*/
 @media (max-width: 54em) {
+  main {
+    height: auto;
+  }
   .fretboard {
     margin-right: 2rem;
   }
@@ -79,12 +83,5 @@
   .open-note,
   .muted-string {
     transform: translateX(1rem);
-  }
-}
-
-/*528px*/
-@media (max-width: 33em) {
-  main {
-    height: auto;
   }
 }
