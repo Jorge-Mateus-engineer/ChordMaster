@@ -115,6 +115,7 @@ const insertBarre = function (barre, baseFret) {
     // Select parent
     document.querySelectorAll(`.fret-numbers li`).forEach((f) => {
       if (f.textContent === `${barre === 1 ? baseFret : baseFret + barre}`) {
+        debugger;
         parentElement = f;
       }
     });
@@ -184,7 +185,7 @@ chordVariations.forEach((variation) =>
     deleteNotes();
     removeBarre();
     //Chord rendering
-    setTimeout(renderChords, 500, 0);
+    setTimeout(renderChords, 200, 0);
   })
 );
 
@@ -194,7 +195,7 @@ positions.forEach((p) =>
     removeBarre();
     positions.forEach((p) => p.classList.remove("active-variation"));
     e.target.classList.add("active-variation");
-    setTimeout(renderChords, 500, parseInt(e.target.textContent) - 1);
+    setTimeout(renderChords, 200, parseInt(e.target.textContent) - 1);
   })
 );
 

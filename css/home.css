@@ -59,6 +59,11 @@ main {
   margin: 0;
 }
 
+.hero-tittle:hover,
+.hero-text:hover {
+  cursor: default;
+}
+
 .cta-button {
   font-size: 2rem;
   transition: all 0.4s;
