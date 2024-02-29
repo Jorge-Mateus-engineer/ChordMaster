@@ -115,7 +115,6 @@ const insertBarre = function (barre, baseFret) {
     // Select parent
     document.querySelectorAll(`.fret-numbers li`).forEach((f) => {
       if (f.textContent === `${barre === 1 ? baseFret : baseFret + barre}`) {
-        debugger;
         parentElement = f;
       }
     });

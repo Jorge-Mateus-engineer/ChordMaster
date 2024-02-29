@@ -43,7 +43,11 @@ body {
 .logo-container {
   height: 4rem;
   width: 4rem;
-  background-color: red;
+  position: relative;
+}
+
+.main-logo {
+  fill: var(--dark-gray);
 }
 
 .nav-list {
